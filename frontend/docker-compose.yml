@@ -1,0 +1,21 @@
+version: '3'
+services:
+  web-app-react:
+    container_name: WebAppReact
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app
+  tests:
+    container_name : CheckPerformer
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"]
